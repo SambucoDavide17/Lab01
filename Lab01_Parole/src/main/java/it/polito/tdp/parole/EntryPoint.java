@@ -2,6 +2,8 @@ package it.polito.tdp.parole;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+
+import it.polito.tdp.parole.model.Parole;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,11 +14,17 @@ public class EntryPoint extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+    	
+    	Parole parole = new Parole();
+    	FXMLController controller;
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
+        Parent root = loader.load();
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         
+        controller = loader.getController();
+        controller.setParole(parole);
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
         stage.show();
